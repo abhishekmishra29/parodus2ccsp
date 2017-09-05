@@ -221,11 +221,18 @@ static void get_parodus_url(char *parodus_url, char *client_url)
 			value = value + strlen("PARODUS_URL=");
 			strncpy(parodus_url, value, (strlen(str) - strlen("PARODUS_URL=")));
 		    }
-		    
+		    else 
+		    {
+			strcpy(parodus_url,"tcp://127.0.0.1:6666");
+		    } 
 		    if(value = strstr(str, "ATOM_PROXY_SERVER="))
 		    {
 			value = value + strlen("ATOM_PROXY_SERVER=");
 			strncpy(atom_ip, value, (strlen(str) - strlen("ATOM_PROXY_SERVER=")));
+		    }
+		     else 
+	            {
+			strcpy(atom_ip,"tcp://127.0.0.1:6663");	
 		    }
 		   
 		}
