@@ -47,10 +47,10 @@ int main()
 	/* Backend Manager for Webpa Creation and Initilization */
 	CosaWebpaBEManagerCreate( );
 	libpd_client_mgr();
-	initComponentCaching();
+	//initComponentCaching();
 	// Initialize Apply WiFi Settings handler
-	initApplyWiFiSettings();
-	initNotifyTask();
+	//initApplyWiFiSettings();
+	//initNotifyTask();
 	parodus_receive_wait();
  
 	WalInfo("Exiting webpa main thread!!\n");
