@@ -67,6 +67,7 @@ execute_process(
 
 add_definitions("-DWEBPA_GIT_VERSION=\"${GIT_COMMIT_TAG}\"")
 
+if (NOT BUILD_YOCTO)
 # cJSON external dependency
 #-------------------------------------------------------------------------------
 ExternalProject_Add(cJSON
@@ -259,7 +260,7 @@ add_library(libcmocka STATIC SHARED IMPORTED)
 add_dependencies(libcmocka cmocka)
 
 endif (BUILD_TESTING)
-
+endif ()
 link_directories ( ${LIBRARY_DIR} ${COMMON_LIBRARY_DIR} ${LIBRARY_DIR64} )
 
 enable_testing()
