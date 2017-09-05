@@ -156,7 +156,7 @@ void waitForOperationalReadyCondition()
 {
 	// Wait till PAM, CM, PSM, WiFi components are ready on the stack.
 	waitForComponentReady(RDKB_PAM_COMPONENT_NAME,RDKB_PAM_DBUS_PATH);
-	waitForComponentReady(RDKB_CM_COMPONENT_NAME,RDKB_CM_DBUS_PATH);
+	//waitForComponentReady(RDKB_CM_COMPONENT_NAME,RDKB_CM_DBUS_PATH);
 	waitForComponentReady(CCSP_DBUS_PSM,CCSP_DBUS_PATH_PSM);
 	waitForComponentReady(RDKB_WIFI_COMPONENT_NAME,RDKB_WIFI_DBUS_PATH);
 	
