@@ -23,9 +23,6 @@ static void connect_parodus()
         //Retry Backoff count shall start at c=2 & calculate 2^c - 1.
         int c =2;
         int retval=-1;
-      
-	
-	pthread_detach(pthread_self());
 
         max_retry_sleep = (int) pow(2, backoff_max_time) -1;
         WalInfo("max_retry_sleep is %d\n", max_retry_sleep );
@@ -38,7 +35,7 @@ static void connect_parodus()
 					.client_url = client_url
 				   };
                 
-        WalPrint("libparodus_init with parodus url %s and client url %s\n",cfg1.parodus_url,cfg1.client_url);
+        WalInfo("libparodus_init with parodus url %s and client url %s\n",cfg1.parodus_url,cfg1.client_url);
         
 
         while(1)
@@ -222,36 +219,45 @@ static void get_parodus_url(char *parodus_url, char *client_url)
 			value = value + strlen("PARODUS_URL=");
 			strncpy(parodus_url, value, (strlen(str) - strlen("PARODUS_URL=")));
 		    }
-		    
+		    else 
+		    {
+			strcpy(parodus_url,"tcp://127.0.0.1:6666");
+		    } 
 		    if(value = strstr(str, "ATOM_PROXY_SERVER="))
 		    {
 			value = value + strlen("ATOM_PROXY_SERVER=");
 			strncpy(atom_ip, value, (strlen(str) - strlen("ATOM_PROXY_SERVER=")));
 		    }
+		     else 
+	            {
+			strcpy(atom_ip,"127.0.0.1");	
+		    }
 		   
 		}
+		fclose(fp);
 	}
 	else
 	{
 		WalError("Failed to open device.properties file:%s\n", DEVICE_PROPS_FILE);
 	}
-	fclose(fp);
 	
 	if (0 == parodus_url[0])
 	{
 		WalError("parodus_url is not present in device. properties:%s\n", parodus_url);
-	
 	}
-	
+	else
+	{
+	    WalInfo("parodus_url formed is %s\n", parodus_url);
+	}
 	if (0 == atom_ip[0])
 	{
 		WalError("atom_ip is not present in device. properties:%s\n", atom_ip);
-	
 	}
-	
-	snprintf(client_url, URL_SIZE, "tcp://%s:%d", atom_ip, CLIENT_PORT_NUM);
-	WalPrint("client_url formed is %s\n", client_url);
-	WalPrint("parodus_url formed is %s\n", parodus_url);	
+	else
+	{
+	    snprintf(client_url, URL_SIZE, "tcp://%s:%d", atom_ip, CLIENT_PORT_NUM);
+	    WalInfo("client_url formed is %s\n", client_url);
+	}
  
  }
  
